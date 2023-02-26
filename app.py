@@ -1,3 +1,4 @@
+from crypt import methods
 import os
 
 from flask import Flask, render_template, request, flash, redirect, session, g
@@ -18,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
@@ -109,13 +110,19 @@ def login():
     return render_template('users/login.html', form=form)
 
 
-@app.route('/logout')
+@app.route('/logout', methods=["GET", "POST"])
 def logout():
     """Handle logout of user."""
-
     # IMPLEMENT THIS
 
-
+    if not g.user:
+         flash(f'Please logn in first', 'danger')
+         return redirect('/login')
+    else:
+        do_logout()
+        flash(f'Logged out', 'info')
+        return redirect('/login')
+    
 ##############################################################################
 # General user routes:
 
