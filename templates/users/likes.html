@@ -1,0 +1,31 @@
+{% extends 'users/detail.html' %}
+
+{% block user_details %}
+  <div class="col-sm-9">
+    <div class="row">
+
+      {% for like in user.likes %}
+
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card user-card">
+            <div class="card-inner">
+              <div class="image-wrapper">
+                  <!-- <img src="{{like.user.header_image_url}} alt="" class="card-hero"> -->
+              </div>
+              <div class="card-contents">
+                  <a href="/users/{{like.user.id}}" class="card-link">
+                  <img src="{{like.user.image_url}}" alt="Image for {{like.user.username}}" class="card-image">
+                  <p class="card-text">Message:{{like.text}}</p>
+                </a>
+              </div>
+              <p class="card-bio"></p>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

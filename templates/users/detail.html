@@ -6,11 +6,11 @@
 
 <header>
 <div class="p-5 text-center bg-image"
-style="background-image: url(https://images.unsplash.com/photo-1677358678832-7e5aea3bc42b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60)";
+style="background-image: url({{user.header_image_url}})";
 height=400px>
 </div>
 </header>
-<img src="{{user.header_image_url}}" alt="Image for {{user.username}} not displaying">
+<!-- <img src="{{user.header_image_url}}" alt="Image for {{user.username}} not displaying"> -->
 
 <div id="warbler-hero" class="full-width"></div>
 
@@ -40,7 +40,9 @@ height=400px>
           </li>
           <li class="stat">
             <p class="small">Likes</p>
-            <h4>TBD</h4>
+            <h4>
+              <a href="/users/{{ user.id }}/likes">{{ user.likes | length }}</a>
+            </h4>
           </li>
           <div class="ml-auto">
             {% if g.user.id == user.id %}
